@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 1rem;
+    background-color: #e3f2fd;
+}
+  
+  header {
+    margin-bottom: 2rem;
+  }
+  
+  .h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #1565c0; 
+    text-align: center;
+  }
+  
