@@ -1,9 +1,9 @@
+<app-header></app-header>
 
 <div class="container">
-    <header>
-        <h1 class="h1">Comment Here!</h1>
-    </header>
-    
-    <post-create></post-create>
+    <post-create (postCreated)="onPostAdded($event)"></post-create>
 </div>
 
+<mat-card>
+    <post-list [posts]="storedPosts"></post-list>
+</mat-card>
