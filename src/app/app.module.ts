@@ -4,8 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
-import { PostCreateComponent } from './post/post-create/post-create.component';
-import { PostListComponent } from './posts/post-list.component';
+import { PostCreateComponent } from './posts/post-create/post-create.component';
+import { PostListComponent } from './posts/post-list/post-list.component';
 import { AppHeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
@@ -15,7 +15,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
-import { MatFormFieldControl } from '@angular/material/form-field';
+import { HttpClientModule } from '@angular/common/http';
+// import { MatFormFieldControl } from '@angular/material/form-field';
 
 
 
@@ -37,6 +38,7 @@ import { MatFormFieldControl } from '@angular/material/form-field';
     MatToolbarModule,
     MatExpansionModule,
     MatIconModule,
+    HttpClientModule
     // MatFormFieldControl
   ],
   providers: [],

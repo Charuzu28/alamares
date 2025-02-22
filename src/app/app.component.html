@@ -1,9 +1,9 @@
 <app-header></app-header>
 
 <div class="container">
-    <post-create (postCreated)="onPostAdded($event)"></post-create>
+    <post-create></post-create>
 </div>
 
 <mat-card>
-    <post-list [posts]="storedPosts"></post-list>
+    <post-list></post-list>
 </mat-card>
