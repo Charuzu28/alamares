@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { MatFormFieldControl } from '@angular/material/form-field';
 
 @NgModule({
@@ -41,6 +42,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatIconModule,
     HttpClientModule,
     MatProgressSpinnerModule, 
+    ReactiveFormsModule,
     
     // MatFormFieldControl
   ],
