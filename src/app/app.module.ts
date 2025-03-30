@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatPaginatorModule} from '@angular/material/paginator';  
 // import { MatFormFieldControl } from '@angular/material/form-field';
 
 @NgModule({
@@ -43,7 +44,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     MatProgressSpinnerModule, 
     ReactiveFormsModule,
-    
+    MatPaginatorModule,
     // MatFormFieldControl
   ],
   providers: [],
