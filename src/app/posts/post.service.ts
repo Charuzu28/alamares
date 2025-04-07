@@ -14,7 +14,7 @@ export class PostsService{
     constructor(private http: HttpClient, private router: Router){}  
 
     getPosts(pagesize: number, currentpage: number){
-      const queryParams = `?pagesize=${pagesize}¤tpage=${currentpage}`;
+      const queryParams = `?pagesize=${pagesize}&currentpage=${currentpage}`;
       this.http.get<{message: string, posts: any, maxPosts: number }>("http://localhost:3000/api/posts" + queryParams)
       .pipe(map((postData) => {
         return {
@@ -33,9 +33,10 @@ export class PostsService{
           this.posts = transformedPostsData.posts;  
           this.postsUpdated.next({  
             posts: [...this.posts],   
-            postCount: transformedPostsData.maxPosts});  
+            postCount: transformedPostsData.maxPosts
+          });  
       });   
-    }
+    }    
     getPostUpdatedListener(){
         return this.postsUpdated.asObservable();
     }

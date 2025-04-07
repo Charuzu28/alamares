@@ -98,11 +98,11 @@ router.get("/:id", (req, res, next) => {
 router.get("/", (req, res) => {
   let documents;
   const PageSize = +req.query.pagesize;
-  const CureentPage = +req.query.currentpage;
+  const CurrentPage = +req.query.currentpage;
   const postquery = Post.find();
 
-  if (PageSize && CureentPage) {
-    postquery.skip(PageSize * (CureentPage - 1)).limit(PageSize);
+  if (PageSize && CurrentPage) {
+    postquery.skip(PageSize * (CurrentPage - 1)).limit(PageSize);
   }
 
   postquery
