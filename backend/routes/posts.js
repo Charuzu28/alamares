@@ -96,12 +96,31 @@ router.get("/:id", (req, res, next) => {
 
 
 router.get("/", (req, res) => {
-  Post.find().then(documents => {
-    res.status(200).json({
-      message: 'Posts successfully fetched',
-      posts: documents
+  let documents;
+  const PageSize = +req.query.pagesize;
+  const CurrentPage = +req.query.currentpage;
+  const postquery = Post.find();
+
+  if (PageSize && CurrentPage) {
+    postquery.skip(PageSize * (CurrentPage - 1)).limit(PageSize);
+  }
+
+  postquery
+    .then((docs) => {
+      documents = docs;
+      return Post.countDocuments(); // ✅ FIXED HERE
+    })
+    .then((count) => {
+      res.status(200).json({
+        message: "Posts fetched successfully",
+        posts: documents,
+        maxPosts: count // ✅ Used by pagination
+      });
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ message: "Fetching posts failed" });
     });
-  });
 });
 
 router.delete("/:id", (req, res) => {

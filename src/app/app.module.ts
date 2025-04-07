@@ -22,12 +22,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';  
 // import { MatFormFieldControl } from '@angular/material/form-field';
 
+import { logincomponent } from './authentication/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     PostCreateComponent,
     PostListComponent,
     AppHeaderComponent,
+    logincomponent
   ],
   imports: [
     AppRoutingModule,
