@@ -23,6 +23,10 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 // import { MatFormFieldControl } from '@angular/material/form-field';
 
 import { logincomponent } from './authentication/login/login.component';
+import { signupcomponent } from './authentication/signup/signup.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './authentication/auth-interceptor';
+import { HeaderComponent } from './posts/header/header.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,9 @@ import { logincomponent } from './authentication/login/login.component';
     PostCreateComponent,
     PostListComponent,
     AppHeaderComponent,
-    logincomponent
+    logincomponent,
+    signupcomponent,
+    HeaderComponent
   ],
   imports: [
     AppRoutingModule,
@@ -50,7 +56,11 @@ import { logincomponent } from './authentication/login/login.component';
     MatPaginatorModule,
     // MatFormFieldControl
   ],
-  providers: [],
+  providers: [{
+    provide:HTTP_INTERCEPTORS, 
+    useClass:AuthInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
