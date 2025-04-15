@@ -130,7 +130,7 @@ router.get("/", (req, res) => {
 router.delete("/:id",checkAuth ,(req, res) => {
   Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {  
     if(result.deletedCount > 0){  
-      res.status(200).json({ message: "Delete successful!" });  
+      res.status(200).json({ message: "Delete successful!" });
     }else{  
       res.status(401).json({ message: "Not Authorized!" });  
     }    
