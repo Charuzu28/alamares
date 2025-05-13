@@ -4,24 +4,29 @@
     </button>
     <span>
       <a routerLink= "/">
-        My App
+       BlogSpot
       </a>
       </span>
       <span class="spacer"></span>
       <ul>
-        <li>
-          <a mat-button routerLink = "/create" routerLinkActive = "mat-accent"> New Post</a>
-        </li>
-        <li>  
-          <a mat-button routerLink = "login"   
-          routerLinkActive = "mat-accent"> Login</a>  
+        <li *ngIf = "userIsAuthenticated">  
+          <a mat-button routerLink = "/create" routerLinkActive = "mat-accent"> New Post</a>  
+        </li>  
+        <li *ngIf = "!userIsAuthenticated">  
+          <a mat-button routerLink = "/login" routerLinkActive = "mat-accent">Login</a>  
+        </li>  
+        <li *ngIf = "!userIsAuthenticated">  
+          <a mat-button routerLink = "/signup" routerLinkActive = "mat-accent">Signup</a>  
+        </li> 
+        <li *ngIf = "userIsAuthenticated">  
+          <button mat-button (click)= "onLogout()">Logout</button>  
         </li>  
       </ul>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    
+        <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle dark mode">
+        <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+      </button>
+
+
   </mat-toolbar>

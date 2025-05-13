@@ -1,6 +1,7 @@
 const express = require("express");
 const Post = require('../models/post');
 const multer = require("multer");
+const checkAuth = require("../middlewares/check-auth.js");
 const router = express.Router();
 
 const MIME_TYPE_MAP = {
@@ -26,13 +27,15 @@ const storage = multer.diskStorage({
 
 router.post(
   "",
+  checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     const url = req.protocol + '://' + req.get("host");
     const post = new Post({
       title: req.body.title,
       content: req.body.content,
-      imagePath: url + "/images/" + req.file.filename
+      imagePath: url + "/images/" + req.file.filename,
+      creator: req.userData.userId  
     });
 
     post.save()
@@ -56,6 +59,7 @@ router.post(
 
 router.put(
   "/:id",
+  checkAuth,
   multer({ storage: storage }).single("image"),
   (req, res, next) => {
     let imagePath = req.body.imagePath;
@@ -70,14 +74,14 @@ router.put(
       imagePath: imagePath
     };
 
-    Post.updateOne({ _id: req.params.id }, post)
-      .then(result => {
-        res.status(200).json({ message: "Update Successful!", imagePath });
-      })
-      .catch(error => {
-        console.error(error);
-        res.status(500).json({ message: "Update failed", error });
-      });
+    Post.updateOne({ _id: req.params.id,   
+      creator: req.userData.userId }, post).then(result => {  
+      if(result.nModified > 0){  
+        res.status(200).json({ message: "Update successful!" });  
+      }else{  
+        res.status(401).json({ message: "Not Authorized!" });  
+      }  
+    });  
   }
 );
 
@@ -123,11 +127,14 @@ router.get("/", (req, res) => {
     });
 });
 
-router.delete("/:id", (req, res) => {
-  Post.deleteOne({ _id: req.params.id }).then(result => {
-    console.log("Deleted:", result);
-    res.status(200).json({ message: "Post deleted" });
-  });
+router.delete("/:id",checkAuth ,(req, res) => {
+  Post.deleteOne({ _id: req.params.id, creator: req.userData.userId }).then(result => {  
+    if(result.deletedCount > 0){  
+      res.status(200).json({ message: "Delete successful!" });
+    }else{  
+      res.status(401).json({ message: "Not Authorized!" });  
+    }    
+  });  
 });
 
 module.exports = router;

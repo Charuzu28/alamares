@@ -11,3 +11,26 @@ a{
 .spacer{  
     flex: 1 1 auto;  
   }  
+
+  .header-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.auth-buttons {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    padding: 0 10px;
+  }
+  
+  .auth-buttons button {
+    padding: 0 8px;
+    min-width: auto;
+  }
+}

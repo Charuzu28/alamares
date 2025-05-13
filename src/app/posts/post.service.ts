@@ -4,14 +4,15 @@ import { Post } from './post.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { response } from 'express';
-import {Router} from '@angular/router';  
+import {Router} from '@angular/router'; 
+import { AuthService } from '../authentication/auth.service'; 
 
 @Injectable({providedIn: 'root'})
 export class PostsService{
     private posts: Post[] = [];
     private postsUpdated = new Subject<{posts: Post[], postCount: number}>(); 
 
-    constructor(private http: HttpClient, private router: Router){}  
+    constructor(private http: HttpClient, private router: Router, private authService: AuthService ){}  
 
     getPosts(pagesize: number, currentpage: number){
       const queryParams = `?pagesize=${pagesize}&currentpage=${currentpage}`;
@@ -23,13 +24,15 @@ export class PostsService{
               title: post.title,
               content: post.content,
               id: post._id,
-              imagePath: post.imagePath
+              imagePath: post.imagePath,
+              creator: post.creator  
             };
           }),
           maxPosts: postData.maxPosts
         };      
         }))
-        .subscribe((transformedPostsData)=>{  
+        .subscribe((transformedPostsData)=>{
+          console.log(transformedPostsData);  
           this.posts = transformedPostsData.posts;  
           this.postsUpdated.next({  
             posts: [...this.posts],   
@@ -45,9 +48,12 @@ export class PostsService{
         return this.http.get<{  
           _id: string,   
           title: string,   
-          content:string,   
+          content:string,
+          creator: string,   
           imagePath: string}>(  
-          "http://localhost:3000/api/posts/"+id);  
+          "http://localhost:3000/api/posts/"+id
+        );
+          
     }  
     
     addPost(title: string, content: string, image: File) {
@@ -63,8 +69,9 @@ export class PostsService{
               id: responseData.post.id,
               title: title,
               content: content,
-              imagePath: responseData.post.imagePath
-            };
+              imagePath: responseData.post.imagePath,
+              creator: responseData.post.creator  // ✅ Include this line
+            };            
             this.posts.push(post);
             this.postsUpdated.next({
               posts: [...this.posts],
@@ -76,6 +83,7 @@ export class PostsService{
       
       updatePost(id: string, title: string, content: string, image: File | string) {
         let postData: Post | FormData;
+        
       
         if (typeof image === 'object') {
           postData = new FormData();
@@ -88,7 +96,8 @@ export class PostsService{
             id: id,
             title: title,
             content: content,
-            imagePath: image
+            imagePath: image,
+            creator: '' // Or use this.authService.getUserId()  
           };
         }
       
@@ -102,8 +111,9 @@ export class PostsService{
             id: id,
             title: title,
             content: content,
-            imagePath: response.imagePath
-          };
+            imagePath: response.imagePath,
+            creator: this.authService.getUserId() // ✅ Add this line
+          };          
           updatedPosts[oldPostIndex] = post;
           this.posts = updatedPosts;
           this.postsUpdated.next({

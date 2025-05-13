@@ -1,6 +1,6 @@
 <mat-card class="container">
-     
-    <form (submit)= "onLogin(loginform)" #loginform= "ngForm" *ngIf = "!Loading">
+      
+    <form (submit)= "onSignup(signupform)" #signupform= "ngForm" *ngIf = "!Loading">
         <mat-form-field>  
             <input  
             matInput name= "email" ngModel  
@@ -24,9 +24,9 @@
         color="primary"  
         type="submit"
         *ngIf= "!Loading">
-        Login
-      </button>
-        <mat-spinner *ngIf="Loading"></mat-spinner>      
+        Signup
+    </button>
+    <mat-spinner *ngIf="Loading"></mat-spinner>    
     </form>
   
     <!-- FIXED footer -->
