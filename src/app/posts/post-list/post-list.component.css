@@ -13,3 +13,30 @@ mat-spinner{
   mat-paginator{  
     margin-top: 1rem;  
   }  
+
+  .search-bar {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.search-bar mat-form-field {
+  width: 100%;
+}
+
+/* Dark Mode */
+/* post-list.component.css */
+:host {
+  display: block;
+  background-color: inherit;
+}
+
+.post-image img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+mat-paginator{
+  background-color: inherit;
+}

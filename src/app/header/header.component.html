@@ -4,7 +4,7 @@
     </button>
     <span>
       <a routerLink= "/">
-        My App
+       BlogSpot
       </a>
       </span>
       <span class="spacer"></span>
@@ -23,10 +23,10 @@
         </li>  
       </ul>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
+    
+        <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle dark mode">
+        <mat-icon>{{ isDarkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+      </button>
+
+
   </mat-toolbar>

@@ -1,4 +1,64 @@
-/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Theme Definitions */
+.light-theme {
+  --primary-color: #3f51b5;
+  --accent-color: #ff4081;
+  --background-color: #f5f5f5;
+  --card-color: #ffffff;
+  --text-color: #333;
+  --text-secondary: #666;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.dark-theme {
+  --primary-color: #000000;
+  --accent-color: #ff80ab;
+  --background-color: #303030;
+  --card-color: #424242;
+  --text-color: #f5f5f5;
+  --text-secondary: #bdbdbd;
+  
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  /* Specific expansion panel overrides for dark mode */
+  .mat-expansion-panel {
+    .mat-expansion-panel-header-title,
+    .mat-expansion-panel-header-description,
+    .mat-expansion-panel-content {
+      color: var(--text-color) !important;
+    }
+    
+    .mat-expansion-indicator::after {
+      color: var(--text-color);
+    }
+  }
+}
+
+/* Apply to components */
+body {
+  transition: all 0.3s ease;
+  
+  .mat-card,
+  .mat-expansion-panel,
+  .mat-menu-panel,
+  .mat-paginator {
+    background-color: var(--card-color);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  .mat-toolbar {
+    background-color: var(--primary-color) !important;
+    color: white;
+  }
+}
